@@ -1,4 +1,9 @@
 {
-	"users": [
-	]
+  "users": [
+    {
+      "username": "user_test",
+      "password": "$2a$10$4rX2TFOrYQI.6BDGwk5M1.kmt7quw2dvGn3vDeGJKWLBFdqW7hH8m",
+      "id": 1
+    }
+  ]
 }
