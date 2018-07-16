@@ -3,17 +3,18 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt-nodejs');
 const axios = require('axios');
+const path = require('path');
 
 const app = express();
 
-app.set('view engine', 'pug');
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: "Your secret key" }));
 
 app.get('/signup', function(req, res) {
-	res.send("Sign up")
+	res.render('signup');
 });
 
 app.post('/signup', function(req, res) {
@@ -31,7 +32,8 @@ app.post('/signup', function(req, res) {
 				console.log(req.session.user);
 				res.redirect('/some_page');
 			} else {
-				res.redirect('/signup')
+				console.log("Entrei");
+				res.render('signup', { message: "Username already exists! Login or choose another username" });
 			}
 		}).cacth(function(err){
 			console.log(err);
