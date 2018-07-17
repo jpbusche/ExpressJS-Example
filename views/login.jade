@@ -1,11 +1,11 @@
 html
 	head
-		title Signup
+		title Login
 	body
-		h3 Register your account
+		h3 Make your login
 		if(message)
 			h4 #{message}
-		form(action = "/signup" method = "post")
+		form(action = "/login" method = "post")
 			label Username:
 				br
 				input(name = "username" type = "text")
@@ -15,4 +15,4 @@ html
 				input(name = "password" type = "password")
 			br
 			br
-			button(type = "Submit") Sign me up!
+			button(type = "Submit") Login!

@@ -15,10 +15,10 @@ passport.use(new LocalStrategy(
 		axios.get('http://localhost:5000/users?username=' + username).then(function(res){
 			const user = res.data[0];
 			if(!user) {
-				return done(null, false, {message: 'Invalid credentials.\n'});
+				return done(null, false, {message: 'Username doesn\'t exists.\n'});
 			}
 			if(!bcrypt.compareSync(password, user.password)) {
-				return done(null, false, {message: 'Invalid credentials.\n'});
+				return done(null, false, {message: 'Wrong password.\n'});
 			}
 			return done(null, user);
 		}).catch(function(err){
@@ -44,15 +44,20 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: "Your secret key" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/signup', function(req, res) {
 	res.render('signup');
 });
 
+app.get('/login', function(req, res) {
+	res.render('login');
+});
+
 app.post('/signup', function(req, res) {
 	if(!req.body.username || !req.body.password) {
-		res.status("400");
-		res.send("Invalid details!");
+		res.render('signup', { message: 'All fields need to be filled' })
 	} else {
 		axios.get('http://localhost:5000/users?username=' + req.body.username).then(function(result){
 			if(!result.data[0]) {
@@ -61,7 +66,7 @@ app.post('/signup', function(req, res) {
 					password: bcrypt.hashSync(req.body.password)
 				});
 				req.session.user = {username: req.body.username, password: req.body.password};
-				res.redirect('/some_page');
+				res.redirect('/login');
 			} else {
 				res.render('signup', { message: "Username already exists! Login or choose another username" });
 			}
@@ -71,9 +76,23 @@ app.post('/signup', function(req, res) {
 	}
 });
 
+app.post('/login', function(req, res, next) {
+	passport.authenticate('local', function(err, user, info) {
+		if(!user) return res.render('login', { message: info.message });
+		if(err) return next(err);
+		req.login(user, function(error) {
+			if(error) return next(err);
+			return res.redirect('/some_page');
+		});
+	})(req, res, next);
+});
+
 app.get('/some_page', function(req, res) {
-	var username = req.session.user.username;
-	res.send("SOME PAGE for you: " + username);
+	if(req.isAuthenticated()) {
+		res.render('some_page');
+	} else {
+		res.render('login', { message: 'You must be logged!' });
+	}
 });
 
 app.listen(3000);

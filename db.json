@@ -1,4 +1,29 @@
 {
   "users": [
+    {
+      "username": "user_test",
+      "password": "$2a$10$SOne184OQugzS3spWMFBFOiLlOQwRmfb/GaSOy/JmOK0Yfc7J1P76",
+      "id": 1
+    },
+    {
+      "username": "jpbusche",
+      "password": "$2a$10$Aee4yUd1IPWlHHTDGf51Yeedbqq9wToQOFNVCXM5lWyl6KqPUXMVm",
+      "id": 2
+    },
+    {
+      "username": "user",
+      "password": "$2a$10$n6e/bm.kcttOSpFYbmc1yulm8RVjzOWOcccsUVbc2tglBinAW5MHm",
+      "id": 3
+    },
+    {
+      "username": "youre",
+      "password": "$2a$10$Rjb1Livi07/0SV.Y6QHMr.ZktWQuivt15EykX3sUz0xErZIe5KejS",
+      "id": 4
+    },
+    {
+      "username": "usertest",
+      "password": "$2a$10$K0Dd3rUIRg1GXoUBPnkhs.7W85jH60kEjwFzEsy2ju9XKzBc/W78e",
+      "id": 5
+    }
   ]
 }
