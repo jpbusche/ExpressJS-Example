@@ -47,6 +47,10 @@ app.use(session({ secret: "Your secret key" }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/', function(req, res) {
+	res.redirect('/login');
+})
+
 app.get('/signup', function(req, res) {
 	res.render('signup');
 });
@@ -86,6 +90,11 @@ app.post('/login', function(req, res, next) {
 		});
 	})(req, res, next);
 });
+
+app.get('/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+})
 
 app.get('/some_page', function(req, res) {
 	if(req.isAuthenticated()) {

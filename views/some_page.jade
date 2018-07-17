@@ -3,4 +3,9 @@ html
 		title Some Page
 	body
 		h3 Welcome to Some Page
-		h6 Want logout? logout
+		h6 Want logout?
+		button(onclick = "logout()") Log Out!
+	script.
+		function logout() {
+			window.location.href = '/logout';
+		}

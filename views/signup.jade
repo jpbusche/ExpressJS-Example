@@ -16,3 +16,8 @@ html
 			br
 			br
 			button(type = "Submit") Sign me up!
+		button(onclick = "login()") Login!
+	script.
+		function login() {
+			window.location.href = '/login';
+		}
