@@ -1,14 +1,9 @@
 {
   "users": [
     {
-      "username": "user_test",
-      "password": "$2a$10$4rX2TFOrYQI.6BDGwk5M1.kmt7quw2dvGn3vDeGJKWLBFdqW7hH8m",
-      "id": 1
-    },
-    {
       "username": "jpbusche",
-      "password": "$2a$10$Rix2BjKpGXQ94tLlDbsBSevPkp.x22c3DH1G3uat34KqCzbqEIq8y",
-      "id": 2
+      "password": "$2a$10$nIzcT/HOHwvnwEvzbdZOQuaijuFtE/blU9pRwjqOQtoHLIUgB4Sh2",
+      "id": 1
     }
   ]
 }

@@ -22,20 +22,18 @@ app.post('/signup', function(req, res) {
 		res.status("400");
 		res.send("Invalid details!");
 	} else {
-		axios.get('http://localhost:5000/users?username=' + req.body.username).then(function(res){
-			if(!res.data[0]) {
+		axios.get('http://localhost:5000/users?username=' + req.body.username).then(function(result){
+			if(!result.data[0]) {
 				axios.post('http://localhost:5000/users', {
 					username: req.body.username,
 					password: bcrypt.hashSync(req.body.password)
 				});
 				req.session.user = {username: req.body.username, password: req.body.password};
-				console.log(req.session.user);
 				res.redirect('/some_page');
 			} else {
-				console.log("Entrei");
 				res.render('signup', { message: "Username already exists! Login or choose another username" });
 			}
-		}).cacth(function(err){
+		}).catch(function(err){
 			console.log(err);
 		});
 	}
