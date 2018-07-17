@@ -6,6 +6,7 @@ const axios = require('axios');
 const path = require('path');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
+const elastic = require('./elastic')
 
 const app = express();
 
@@ -101,6 +102,28 @@ app.get('/some_page', function(req, res) {
 		res.render('some_page');
 	} else {
 		res.render('login', { message: 'You must be logged!' });
+	}
+});
+
+app.get('/all_games', function(req, res) {
+	if(req.isAuthenticated()) {
+		elastic.getAllGames().then(function(result) {
+			res.json(result)
+		})
+	} else {
+		res.render('login', { message: 'You must be logged!' });
+	}
+});
+
+app.post('/games', function(req, res) {
+	if(req.isAuthenticated()) {
+		if(!req.body.gameName) {
+			res.render('some_page', { message: "Something must be passed" })
+		} else {
+			elastic.getGames(req.body.gameName).then(function(result) {
+				res.json(result);
+			});
+		}
 	}
 });
 

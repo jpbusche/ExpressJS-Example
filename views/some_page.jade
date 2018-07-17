@@ -3,9 +3,21 @@ html
 		title Some Page
 	body
 		h3 Welcome to Some Page
+		if(message)
+			h4 #{message}
+		form(action = "/games", method = "post")
+			label Game Name:
+				br
+				input(type = "text", name = "gameName")
+			button(type = "Submit") Get Games!
+		br 
+		button(onclick = "all_games()") Get All Games!
 		h6 Want logout?
 		button(onclick = "logout()") Log Out!
 	script.
+		function all_games() {
+			window.location.href = '/all_games';
+		}
 		function logout() {
 			window.location.href = '/logout';
 		}
