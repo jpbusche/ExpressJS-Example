@@ -124,6 +124,8 @@ app.post('/games', function(req, res) {
 				res.json(result);
 			});
 		}
+	} else {
+		res.render('login', { message: "You must be logged!" });
 	}
 });
 
